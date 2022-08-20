@@ -1,10 +1,15 @@
  <!-- Content Header (Page header) -->
 <?php 
+require_once 'controller/area.controller.php';
 require_once 'controller/persona.controller.php';
+require_once 'controller/cargo.controller.php';
 
+$area = new AreaController; 
 $persona = new PersonaController;	
+$cargo = new CargoController;	
+$areas = $area->Listar(); 
 $personas = $persona->ListarPersonalTI(1); 
-?>
+ ?>
 
 
 <section class="content-header">  
@@ -50,6 +55,10 @@ $Persona= $this->Consultar($_REQUEST['idPersona']);
 					    <div class="form-group col-md-3">
 					        <label for="apellido_materno">Apellido Materno</label>
 					        <input type="text" id="apellido_materno" name="apellido_materno" value="<?php echo $Persona->__GET('apellido_materno'); ?>" class="form-control" placeholder=""  required />
+					    </div>
+					    <div class="form-group col-md-3">
+					        <label for="PrimNomyApePat">Nombre Firma</label>
+					        <input type="text" id="PrimNomyApePat" name="PrimNomyApePat" value="<?php echo $Persona->__GET('PrimNomyApePat'); ?>" class="form-control" placeholder=""  required />
 					    </div>
 					    <div class="form-group col-md-3">
 					        <label for="dni">DNI</label>
@@ -100,6 +109,28 @@ $Persona= $this->Consultar($_REQUEST['idPersona']);
 					        <input type="text" id="correo" name="correo" value="<?php echo $Persona->__GET('correo'); ?>" class="form-control" placeholder=""  required />
 					    </div>
 					    <div class="form-group col-md-3">
+					        <label for="correo_personal">Correo Personal</label>
+					        <input type="text" id="correo_personal" name="correo_personal" value="<?php echo $Persona->__GET('correo_personal'); ?>" class="form-control" placeholder=""  required />
+					    </div>
+
+
+					    <div class="form-group col-md-3">
+					        <label>Area</label>
+					        <select  type="text" id="Area_id" name="Area_id"  class="form-control formulario__input" placeholder=""  required />
+					        	 <option value="0">-- Seleccionar Área--</option>      
+				          <?php foreach ($areas as $area): ?>                
+				            <option value="<?php echo $area['idArea']; ?>"><?php echo $area['Nombre']; ?></option>                      
+				          <?php endforeach; ?>  
+					        </select>
+					    </div>
+
+					    <div class="form-group col-md-3">
+					        <label for="Cargo_id">Cargo</label>
+					        <select name="Cargo_id" id="Cargo_id" class="form-control formulario__input">
+					        <option value="0">-- Seleccionar Cargo--</option>       
+					        </select> 
+					    </div>
+					    <div class="form-group col-md-3">
 					        <label>Fecha Salida</label>
 					        <input type="date" id="fecha_salida" name="fecha_salida" value="<?php echo $Persona->__GET('fecha_salida'); ?>" class="form-control" placeholder=""  required />
 					    </div>
@@ -139,6 +170,8 @@ $Persona= $this->Consultar($_REQUEST['idPersona']);
 	$(document).ready(function() {
 		$('#sexo').val("<?php echo $Persona->__GET('sexo'); ?>");
 		$('#tipo_horario').val("<?php echo $Persona->__GET('tipo_horario'); ?>");
+		$('#Area_id').val("<?php echo $Persona->__GET('Area_id'); ?>");
+		ListarCargoxArea_id($('#Area_id').val());
 		
 		
 		$("#btnSubmit").click(function(event) {
@@ -189,15 +222,16 @@ $Persona= $this->Consultar($_REQUEST['idPersona']);
 			$(this).val(PrimeraLetraMayuscula($(this).val()))
   		});
 
-  		$( "#Area_id" ).change(function ()
-  		{
-  			Area_id = $("#Area_id").val();
-  			//alert(Area_id);
-
-  			ListarCargoxArea_id(Area_id);
-  		});
 
 
+		$( "#Area_id" ).change(function ()
+ 		{
+			Area_id = $("#Area_id").val();
+			//alert(Area_id);
+
+			ListarCargoxArea_id(Area_id);
+
+		});
 
 
 	});
@@ -209,27 +243,28 @@ $Persona= $this->Consultar($_REQUEST['idPersona']);
 	}
 
 	function ListarCargoxArea_id(Area_id){
-		$.ajax({
-			type: "POST",
-			url: 'index.php?c=Cargo&a=ListarxArea_id_ajax',
-			data:{
-				Area_id:Area_id
-			},
-			//sync:false
-			success: function(data) {
-				//console.log(data);
-				var html = "";
-				$("#Cargo_id").find("option").remove();
-				$.each(data, function(index, value){
-					html += '<option value="'+value.idCargo+'">'+value.nombre+'</option>';
-				});
-				$("#Cargo_id").append('<option value="0">-- Seleccionar Cargo --</option>');
-				$("#Cargo_id").append(html);
-				$('#Cargo_id').val("<?php echo $Persona->__GET('Cargo_id'); ?>")
-			},
-			dataType: 'json'
-		});
+	    $.ajax({
+	      	type: "POST",
+	      	url: 'index.php?c=Cargo&a=ListarxArea_id_ajax',
+	      	data:{
+	      		Area_id:Area_id
+	      	},
+	      	//sync:false,           
+	      	success: function(data) {
+	        	//console.log(data);
+	          	var html = "";
+	          	$("#Cargo_id").find("option").remove();                 
+	          	$.each(data, function(index, value) { 
+	            	html += '<option value="'+value.idCargo+'">'+value.nombre+'</option>';
+	          	});
+	        	$("#Cargo_id").append('<option value="0">-- Seleccionar Cargo --</option>');        
+	          	$("#Cargo_id").append(html);
+	          	$('#Cargo_id').val("<?php echo $Persona->__GET('Cargo_id'); ?>")  
+	        },
+	      	dataType: 'json'
+	  	});
 	}
+
 
 </script>
 <?php }/*--- END REQUESt*/ ?>

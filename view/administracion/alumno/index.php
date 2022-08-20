@@ -29,7 +29,7 @@
 			                    <th style="vertical-align: middle;">Apellido Materno</th>
 			                    <th style="vertical-align: middle;">Edad</th>
 			                    <th style="vertical-align: middle;">DNI</th>
-			                    <th style="vertical-align: middle;">Fecha Nacimiento</th>
+			                    <th style="vertical-align: middle;">Fecha de Nacimiento</th>
 			                    <th style="vertical-align: middle;">Curso</th>
 			                    <th style="vertical-align: middle;">Carrera</th>
 
@@ -41,7 +41,6 @@
 	                    	<?php foreach ($alumnos as $alumno): ?>
 	                    	<tr>
 	                    		<td><?php echo $alumno['idAlumno']; ?></td>
-
 	                    		<td><?php echo $alumno['primer_nombre']; ?></td>
 	                    		<td><?php echo $alumno['apellido_paterno']; ?></td>
 	                    		<td><?php echo $alumno['apellido_materno']; ?></td>

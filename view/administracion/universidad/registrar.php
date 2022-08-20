@@ -1,8 +1,9 @@
+
 <!-- Content Header (Page header) -->
 <?php 
-require_once 'controller/curso.controller.php';
+require_once 'controller/universidad.controller.php';
 
-$curso = new CursoController;	
+$universidad = new UniversidadController;	
  ?>
 <section class="content-header">  
 	<h1>
@@ -20,13 +21,13 @@ $curso = new CursoController;
 		<div class="col-sm-12 col-md-8 col-md-offset-2">
 	  		<div class="box">
 	    		<div class='box-header with-border'>
-	      			<h3 class='box-title'><i class="fa fa-briefcase"></i> Registrar Curso</h3>
+	      			<h3 class='box-title'><i class="fa fa-briefcase"></i> Registrar Universidad</h3>
 	    		</div>
 	    		<div class="box-body">
-	    			<form id="frmRegistrarCurso"  action="?c=Curso&a=Registrar" method="post" enctype="multipart/form-data" role="form">	   				
+	    			<form id="frmRegistrarUniversidad"  action="?c=Universidad&a=Registrar" method="post" enctype="multipart/form-data" role="form">	   				
 
 					    <div class="form-group col-md-3 formulario__grupo formulario__grupo-correcto" id="grupo__primer_nombre" >
-					        <label for="primer_nombre" class="formulario__label">Nombre del curso</label>
+					        <label for="primer_nombre" class="formulario__label">Nombre</label>
 					        	<div class="formulario__grupo-input">
 					        		<input type="text" id="nombre" name="nombre" value="" class="form-control  formulario__input" placeholder=""  required />
 					        	</div> 	
@@ -34,16 +35,31 @@ $curso = new CursoController;
 
 
 					    <div class="form-group col-md-3">
-					        <label for="segundo_nombre">Profesor</label>
-					        <input type="text" id="profesor" name="profesor" value="" class="form-control formulario__input" placeholder=""  required />
+					        <label for="segundo_nombre">Código</label>
+					        <input type="text" id="codigo" name="codigo" value="" class="form-control formulario__input" placeholder=""  required />
 					    </div>					   
-					    
+					    <div class="form-group col-md-3">
+					        <label for="apellido_paterno">Dirección</label>
+					        <input type="text" id="direccion" name="direccion" value="" class="form-control formulario__input" placeholder=""  required />
+					    </div>
+					    <div class="form-group col-md-3">
+					        <label for="tipo_horario">Licenciado</label>
+					        <select  type="text" id="licenciado" name="licenciado"  class="form-control formulario__input" placeholder=""  required />
+					        	<option value="1">Si</option>
+					        	<option value="0">No</option>
+					        </select>
+					    </div>
+					    <div class="form-group col-md-3">
+					        <label for="dni">Cant. de Carreras</label>
+					        <input type="text" id="cantidad_carreras" name="cantidad_carreras" value="" class="form-control formulario__input" placeholder=""  required />
+					    </div>
+
 					  	<div class="col-md-12" style="margin-top:2em;">
 					  		<div class="col-md-6 col-sm-12">
 					        <button type="button" id="btnSubmit" class="btn btn-primary col-md-12 col-xs-12" disable><i class="fa fa-save"></i> Registrar</button>    		      
 					    </div>
 					     <div class="col-md-6 col-sm-12">					    
-					        <a href="index.php?c=Curso" class="btn btn-danger col-md-12 col-xs-12 "><i class="fa fa-times-circle"></i> Cancelar</a>
+					        <a href="index.php?c=Universidad" class="btn btn-danger col-md-12 col-xs-12 "><i class="fa fa-times-circle"></i> Cancelar</a>
 					    </div>  
 					  </div>
 					</form> 
@@ -61,7 +77,7 @@ $curso = new CursoController;
 
 			bootbox.dialog({
 	            message: "¿Estas seguro de Registrar?",
-	            title: "Registrar Curso",
+	            title: "Registrar Universidad",
 	            buttons: {
 	                main: {
 	                    label: "Registrar",
@@ -69,7 +85,7 @@ $curso = new CursoController;
 	                    callback: function() {
 	                        //console.log('Eliminado al usuario');
 	                        
-	                              $( "#frmRegistrarCurso" ).submit();
+	                              $( "#frmRegistrarUniversidad" ).submit();
 	                    }
 	                },
 	                danger: {

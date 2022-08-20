@@ -2,7 +2,8 @@
 <?php 
 require_once 'controller/curso.controller.php';
 
-$curso = new CursoController;	 
+$curso = new CursoController;	
+
 ?>
 
 
@@ -12,7 +13,7 @@ $curso = new CursoController;
 	</h1>
 	<ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li><a href="index.php?c=Persona">Persona</a></li>
+            <li><a href="index.php?c=Curso">Curso</a></li>
             <li class="active">Actualizar</li>
           </ol>
 </section>
@@ -44,15 +45,16 @@ $Curso= $this->Consultar($_REQUEST['idCurso']);
 					        <label for="segundo_nombre">Profesor</label>
 					        <input type="text" id="profesor" name="profesor" value="<?php echo $Curso->__GET('profesor'); ?>" class="form-control" placeholder=""  required />
 					    </div>					   
-					    
-
+					    					    
 					    <div class="form-group col-md-12">
 					      <label>Activo</label>
 					      <label class="radio-inline">
-					          <input type="radio" name="activo" id="estado_activo" value="1" <?php if ($Curso->__GET('activo')==1) { echo 'checked';  } ?>> SI
+					          <input type="radio" name="activo" id="estado_activo" value="1"
+							   <?php if ($Curso->__GET('activo')==1) { echo 'checked';  } ?>> SI
 					      </label>
 					      <label class="radio-inline">
-					          <input type="radio" name="activo" id="estado_inactivo" value="0" <?php if ($Curso->__GET('activo')==0) { echo 'checked'; }  ?>> NO
+					          <input type="radio" name="activo" id="estado_inactivo" value="0"
+							   <?php if ($Curso->__GET('activo')==0) { echo 'checked'; }  ?>> NO
 					      </label>					    
 					    </div>
 					  
@@ -60,14 +62,14 @@ $Curso= $this->Consultar($_REQUEST['idCurso']);
 					  <div class="col-md-12" style="margin-top:2em;">
 					    <div class="col-md-6 col-sm-12">
 					        
-					        <button type="button" id="btnSubmit" class="btn btn-primary col-md-12 col-xs-12"><i class="fa fa-save"></i> Actualizar</button>    
+					        <button type="button" id="btnSubmit" class="btn btn-primary col-md-12 col-xs-12">
+								<i class="fa fa-save"></i> Actualizar</button>    
 					      
 					    </div>
 					     <div class="col-md-6 col-sm-12">
 
-					       
-					    
-					        <a href="index.php?c=Curso" class="btn btn-danger col-md-12 col-xs-12 "><i class="fa fa-times-circle"></i> Cancelar</a>
+					        <a href="index.php?c=Curso" class="btn btn-danger col-md-12 col-xs-12 ">
+								<i class="fa fa-times-circle"></i> Cancelar</a>
 					    </div>  
 					  </div>
 					</form>                   
@@ -79,8 +81,7 @@ $Curso= $this->Consultar($_REQUEST['idCurso']);
 <script>
 	
 	$(document).ready(function() {
-		
-		
+
 		$("#btnSubmit").click(function(event) {
 
 			bootbox.dialog({
@@ -94,8 +95,7 @@ $Curso= $this->Consultar($_REQUEST['idCurso']);
 	                        //console.log('Eliminado al usuario');
 	                        
 	                              $( "#frmActualizarCurso" ).submit();
-	                         
-
+	                      
 	                       
 	                    }
 	                },

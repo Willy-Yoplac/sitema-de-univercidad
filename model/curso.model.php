@@ -5,23 +5,22 @@ class CursoModel
 	
  private $bd;
 
-   
-    public function Listar()
-    {
-        $this->bd = new Conexion();
-        $stmt = $this->bd->prepare("SELECT * FROM curso where eliminado=0 order by idCurso;" );
-        $stmt->execute();
+ public function Listar()
+ {
+     $this->bd = new Conexion();
+     $stmt = $this->bd->prepare("SELECT * FROM curso where eliminado=0 order by idCurso;" );
+     $stmt->execute();
 
-        if (!$stmt->execute()) {
-            return 'error';
-            //print_r($stmt->errorInfo());
-        }else{            
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }       
+     if (!$stmt->execute()) {
+         return 'error';
+         //print_r($stmt->errorInfo());
+     }else{            
+         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+     }       
 
-    }
+ }
 
-    public function Registrar(Curso $curso)
+ public function Registrar(Curso $curso)
     {
        
   
@@ -45,8 +44,6 @@ class CursoModel
         }
     }
 
-
-
     public function Consultar(Curso $curso)
     {
         $this->bd = new Conexion();
@@ -58,12 +55,53 @@ class CursoModel
         $objCurso->__SET('idCurso',$row->idCurso);
         $objCurso->__SET('nombre',$row->nombre);
         $objCurso->__SET('profesor',$row->profesor);
-        
         $objCurso->__SET('activo',$row->activo);
    
         return $objCurso;
     }
 
- 
+    public function Actualizar(Curso $curso)
+    {
+      
+        $this->bd = new Conexion();
+        $stmt = $this->bd->prepare("UPDATE curso SET  nombre=:nombre,profesor=:profesor,activo=:activo,modificado_por=:modificado_por WHERE idCurso=:idCurso;");
+
+        $stmt->bindParam(':idCurso',$curso->__GET('idCurso'));
+        $stmt->bindParam(':nombre',$curso->__GET('nombre'));
+        $stmt->bindParam(':profesor',$curso->__GET('profesor'));
+        $stmt->bindParam(':activo',$curso->__GET('activo'));
+        $stmt->bindParam(':modificado_por',$curso->__GET('modificado_por'));
+
+           
+        if (!$stmt->execute()) {
+          
+           // $errors = $stmt->errorInfo();
+            
+             return 'error';
+           //return $errors[2];  
+        }else{
+            
+            return 'exito';
+        }
+    }    
+
+    public function Eliminar(Curso $curso)
+    {
+       
+        $this->bd = new Conexion();
+        $stmt = $this->bd->prepare("UPDATE curso SET  modificado_por=:modificado_por,eliminado=:eliminado WHERE idCurso = :idCurso");
+
+        $stmt->bindParam(':idCurso',$curso->__GET('idCurso'));         
+        $stmt->bindParam(':modificado_por',$curso->__GET('modificado_por'));
+        $stmt->bindParam(':eliminado',$curso->__GET('eliminado'));    
+        if (!$stmt->execute()) {
+            return 'error';
+        //print_r($stmt->errorInfo());
+        }else{
+            
+            return 'exito';
+        }
+         
+    }
 }
 ?>

@@ -49,16 +49,28 @@
                                 <td class=""><span class="label label-danger"><i class="fa fa-square-o" aria-hidden="true"></i> Inactivo</span></td>
                                 <?php endif ?>
                             	<td class="a_center">                            		
-                            		<a href="?c=Persona&a=v_Actualizar&idPersona=<?php echo $persona['idPersona']; ?>" class="btn btn-primary btn-xs " data-toggle="tooltip" data-placement="top" title="Actualizar">
+                            		<a href="?c=Persona&a=v_Actualizar&idPersona=<?php echo $persona['idPersona']; ?>" 
+									class="btn btn-primary btn-xs " data-toggle="tooltip" data-placement="top" title="Actualizar">
                                    		<i class="fa fa-pencil"></i>   
                                		</a>
-                               		<a class="btn btn-danger btn-xs EliminarPersona" data-id="<?php echo $persona['idPersona']; ?>" data-persona="<?php echo $persona['apellido_paterno'].' '.$persona['apellido_materno'].' '.$persona['primer_nombre'].' '.$persona['segundo_nombre']; ?>" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                               		<a class="btn btn-danger btn-xs EliminarPersona" 
+									data-id="<?php echo $persona['idPersona']; ?>" data-persona="
+									<?php echo $persona['apellido_paterno'].' '.$persona['apellido_materno'].' '.$persona['primer_nombre'].' '.$persona['segundo_nombre']; ?>" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                    		<i class="fa fa-trash"></i>   
                                		</a>
 
                                	</td>
 	                    	</tr>
 	                    	<?php endforeach; ?>
+
+	                    	<?php
+	                    	echo '<pre>' ;
+	                    	$personas = $this->Listar();
+	                    		print_r($personas);
+	                    		//print_r($personas[0]['primer_nombre']);
+	                    	echo '</pre>';
+
+	                    	?>
 	                    </tbody>
                 	</table>                    
                 </div>

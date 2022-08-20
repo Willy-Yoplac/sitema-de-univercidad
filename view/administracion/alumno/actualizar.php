@@ -68,16 +68,16 @@ $Alumno= $this->Consultar($_REQUEST['idAlumno']);
 					        <label for="dni">DNI</label>
 					        <input type="text" id="dni"name="dni" value="<?php echo 
 							$Alumno->__GET('dni'); ?>" class="form-control" placeholder=""  
-							required />
+							required disabled/>
 					    </div>
 						<div class="form-group col-md-3">
-					        <label for="fecha_nacimiento">Fecha Nacimiento</label>
+					        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
 					        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" 
 							value="<?php echo $Alumno->__GET('fecha_nacimiento'); ?>" class="form-control" 
 							placeholder=""  required />
 					    </div>
 						<div class="form-group col-md-3">
-					        <label for="curso">curso</label>
+					        <label for="curso">Curso</label>
 					        <input type="text" id="curso"name="curso" value="<?php echo 
 							$Alumno->__GET('curso'); ?>" class="form-control" placeholder=""  
 							required />

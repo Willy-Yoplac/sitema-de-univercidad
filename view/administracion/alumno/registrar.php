@@ -53,7 +53,7 @@ $alumno = new AlumnoController;
 					    </div>
 					    				 
 					    <div class="form-group col-md-3">
-					        <label for="fecha_nacimiento">Fecha Nacimiento</label>
+					        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
 					        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="" class="form-control formulario__input" placeholder=""  required />
 					    </div>
 
